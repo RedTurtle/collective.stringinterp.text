@@ -29,7 +29,7 @@ class TextSubstitution(BaseSubstitution):
             adapter = ITextExtractor(self.context)
         except ComponentLookupError:
             return None
-        return adapter.text
+        return "\n".join([l.strip() for l in adapter.text.splitlines()])
 
 class IndentedTextSubstitution(TextSubstitution):
     """Like full body text substitution aobve, but with indentation chars"""
@@ -41,7 +41,7 @@ class IndentedTextSubstitution(TextSubstitution):
     def safe_call(self):
         text = TextSubstitution.safe_call(self)
         if text:
-            return "\n".join(["\t" + l.strip() for l in text.splitlines()])
+            return "\n".join(["\t" + l for l in text.splitlines()])
 
 
 class ATTextExtractor(object):

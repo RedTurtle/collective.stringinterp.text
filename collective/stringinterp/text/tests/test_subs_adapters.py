@@ -39,7 +39,6 @@ class TestStringSubstitutionAdapter(unittest.TestCase):
         adapter = ITextExtractor(doc)
         self.assertEqual(adapter.text, 'Foo bar baz \n Lorem Ipsum')
 
-
 class TestCommentAdapter(unittest.TestCase):
 
     layer = STRING_INTERP_TEXT_INTEGRATION_TESTING
