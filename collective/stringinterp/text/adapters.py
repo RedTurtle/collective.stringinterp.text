@@ -79,6 +79,26 @@ class PADiscussionTextExtractor(object):
         stream = transforms.convertTo('text/plain', text, mimetype='text/html')
         return stream.getData().strip()
 
+class DexterityTextExtractor(object):
+    """Try to extract text from Dexterity contents
+    """
+    
+    implements(ITextExtractor)
+    
+    def __init__(self, context):
+        self.context = context
+    
+    @property
+    def text(self):
+        context = self.context
+        text = getattr(context, 'text', '')
+        if isinstance(text, basestring):
+            text = text.decode('utf-8')
+        else:
+            text = getattr(context.text, 'output')
+        transforms = getToolByName(context, 'portal_transforms')
+        stream = transforms.convertTo('text/plain', text, mimetype='text/html')
+        return stream.getData().strip()
 
 class GeneralTextExtractor(object):
     """Try to extract text from something (AKA: there is a "text" attribute?)
@@ -96,6 +116,7 @@ class GeneralTextExtractor(object):
         if isinstance(text, basestring):
             text = text.decode('utf-8')
         elif isinstance(text, BaseUnit):
+            # Ploneboard use this mess
             text = str(text).decode('utf-8')
         else:
             return ''

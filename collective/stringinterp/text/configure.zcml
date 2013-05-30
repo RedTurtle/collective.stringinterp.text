@@ -31,6 +31,12 @@
        factory=".adapters.PADiscussionTextExtractor"
        />
    <adapter
+       zcml:condition="installed plone.dexterity"
+       for="plone.dexterity.interfaces.IDexterityContent"
+       provides=".interfaces.ITextExtractor"
+       factory=".adapters.DexterityTextExtractor"
+       />
+   <adapter
        for="*"
        provides=".interfaces.ITextExtractor"
        factory=".adapters.GeneralTextExtractor"

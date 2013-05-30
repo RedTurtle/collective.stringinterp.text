@@ -3,7 +3,7 @@ import os
 
 version = '0.1.dev0'
 
-tests_require = ['plone.app.testing', ]
+tests_require = ['plone.app.testing', 'plone.dexterity']
 
 setup(name='collective.stringinterp.text',
       version=version,

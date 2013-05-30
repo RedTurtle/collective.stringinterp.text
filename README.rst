@@ -63,9 +63,9 @@ Generally, those kind of text extraction is supported:
 * ATContentTypes based content types with a *text* field
   (Event, News Item, Document, Topic)
 * Comment from plone.app.discussion
+* Dexterity content types with a *text* field
 
 Plus, a general adapter that simply try to read if a "text" attribute is provided.
-(this will probably fix the use with Dexterity too).
 
 Credits
 =======
