@@ -14,12 +14,14 @@ setup(name='collective.stringinterp.text',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
+        "Development Status :: 4 - Beta",
         "Framework :: Plone",
         "Framework :: Plone :: 4.0",
         "Framework :: Plone :: 4.1",
         "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
+        "License :: OSI Approved :: GNU General Public License (GPL)",
         ],
       keywords='plone plonegov rule interpolation email',
       author='RedTurtle Technology',

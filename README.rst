@@ -3,20 +3,53 @@ This is a Plone extension for the `plone.stringinterp`__ module.
 __ https://pypi.python.org/pypi/plone.stringinterp
 
 Adding this to your buildout and you will be able to add **full content text** in
-your **contentrules** e-mail messages.
+**content rules** e-mail messages.
 
 How to use
 ==========
 
-When you are preparing e-mail action for your Plone Content Rules, you can use two new
+When you are preparing e-mail action for your Plone Content Rules you can now use two additional
 marker in the text:
 
 ``${text}``
     The current document full text
 ``${indented_text}``
-    Same as above, but right-indent the text using a tabular char before every line.
+    Same as above, but right-indent the text using a tab char before every line.
 
 Text is transformed from HTML to plain text (as ussualy are Plone e-mail).
+
+A mail message rule configured like this::
+
+    Hi,
+    
+    the new document "${title}" has been created.
+    
+    ${text}
+
+...will generate this::
+
+    Hi,
+    
+    the new document "Welcome to Plone" has been created.
+    
+    If you're seeing this instead of the web site you were expecting... 
+
+And a mail message rule configured like this::
+
+    Hi,
+    
+    the new document "${title}" has been created.
+    
+    ${indented_text}
+
+...will generate this::
+
+    Hi,
+    
+    the new document "Welcome to Plone" has been created.
+    
+    	If you're seeing this instead of the web site you were expecting... 
+
 
 Getting text
 ------------
@@ -25,13 +58,13 @@ Getting text
 This product try to guess text using adapters, so you can override or provide more specific
 ones (see the code some example).
 
-In general those kind of text is supported:
+Generally, those kind of text extraction is supported:
 
 * ATContentTypes based content types with a *text* field
-  (Event, News Item, Document)
+  (Event, News Item, Document, Topic)
 * Comment from plone.app.discussion
 
-Plus, a general adapter that simply try to read a "text" attribute is provided as fallback
+Plus, a general adapter that simply try to read if a "text" attribute is provided.
 (this will probably fix the use with Dexterity too).
 
 Credits
