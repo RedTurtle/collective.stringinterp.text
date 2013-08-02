@@ -1,11 +1,11 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.1 (2013-08-02)
+------------------
 
-- Nothing changed yet.
-
+- locales folder was not registered
+  [keul]
 
 0.1 (2013-05-30)
 ----------------
