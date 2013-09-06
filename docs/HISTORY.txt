@@ -4,7 +4,7 @@ Changelog
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- fix adapter when objects doesn't have text field (ie Files) [cekk]
 
 
 0.1.1 (2013-08-02)
