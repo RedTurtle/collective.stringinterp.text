@@ -29,7 +29,6 @@ class TextSubstitution(BaseSubstitution):
             adapter = ITextExtractor(self.context)
         except ComponentLookupError:
             return None
-        import pdb;pdb.set_trace()
         if adapter.text:
             return "\n".join([l.strip() for l in adapter.text.splitlines()])
         return ""
