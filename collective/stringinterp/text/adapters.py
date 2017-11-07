@@ -33,6 +33,7 @@ class TextSubstitution(BaseSubstitution):
             return "\n".join([l.strip() for l in adapter.text.splitlines()])
         return ""
 
+
 class IndentedTextSubstitution(TextSubstitution):
     """Like full body text substitution aobve, but with indentation chars"""
 
@@ -48,12 +49,12 @@ class IndentedTextSubstitution(TextSubstitution):
 
 class ATTextExtractor(object):
     """Extract text field from ATCT contents"""
-    
+
     implements(ITextExtractor)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     @property
     def text(self):
         context = self.context
@@ -61,18 +62,20 @@ class ATTextExtractor(object):
         if field:
             text = field.get(context)
             transforms = getToolByName(context, 'portal_transforms')
-            stream = transforms.convertTo('text/plain', text, mimetype='text/html')
+            stream = transforms.convertTo('text/plain',
+                                          text,
+                                          mimetype='text/html')
             return stream.getData().strip()
 
 
 class PADiscussionTextExtractor(object):
     """Extract text field from plone.app.discussion comments"""
-    
+
     implements(ITextExtractor)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     @property
     def text(self):
         context = self.context
@@ -81,15 +84,16 @@ class PADiscussionTextExtractor(object):
         stream = transforms.convertTo('text/plain', text, mimetype='text/html')
         return stream.getData().strip()
 
+
 class DexterityTextExtractor(object):
     """Try to extract text from Dexterity contents
     """
-    
+
     implements(ITextExtractor)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     @property
     def text(self):
         context = self.context
@@ -97,20 +101,21 @@ class DexterityTextExtractor(object):
         if isinstance(text, basestring):
             text = text.decode('utf-8')
         else:
-            text = getattr(context.text, 'output')
+            text = getattr(context.text, 'output', '')
         transforms = getToolByName(context, 'portal_transforms')
         stream = transforms.convertTo('text/plain', text, mimetype='text/html')
         return stream.getData().strip()
 
+
 class GeneralTextExtractor(object):
     """Try to extract text from something (AKA: there is a "text" attribute?)
     """
-    
+
     implements(ITextExtractor)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     @property
     def text(self):
         context = self.context
@@ -125,4 +130,3 @@ class GeneralTextExtractor(object):
         transforms = getToolByName(context, 'portal_transforms')
         stream = transforms.convertTo('text/plain', text, mimetype='text/html')
         return stream.getData().strip()
-
