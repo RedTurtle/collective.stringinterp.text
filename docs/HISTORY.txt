@@ -4,7 +4,9 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- fix adapter when object dexterity content have completely empty
+  text field.
+  [lucabel]
 
 
 0.2 (2013-09-06)
