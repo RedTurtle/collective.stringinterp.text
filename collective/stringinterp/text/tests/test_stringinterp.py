@@ -2,7 +2,7 @@
 
 import unittest
 
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import Interface
 from zope.component import getAdapter
 
@@ -15,8 +15,9 @@ from plone.stringinterp.interfaces import IStringSubstitution
 from collective.stringinterp.text.testing import STRING_INTERP_TEXT_INTEGRATION_TESTING
 
 
+@implementer(Interface)
 class Foo(object):
-    implements(Interface)
+
     def __init__(self):
         self.text = ''
 

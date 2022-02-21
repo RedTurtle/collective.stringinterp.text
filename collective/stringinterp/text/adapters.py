@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import implements
+from zope.interface import implementer
 from zope.component.interfaces import ComponentLookupError
 
 from Products.CMFCore.utils import getToolByName
-from Products.Archetypes.BaseUnit import BaseUnit
 
 from plone.stringinterp.interfaces import IStringSubstitution
 from plone.stringinterp.adapters import BaseSubstitution
@@ -16,10 +15,9 @@ from collective.stringinterp.text import _
 from collective.stringinterp.text.interfaces import ITextExtractor
 
 
+@implementer(IStringSubstitution)
 class TextSubstitution(BaseSubstitution):
     """Full body text substitution"""
-
-    implements(IStringSubstitution)
 
     category = PMF(u'All Content')
     description = _(u'Body text')
@@ -34,10 +32,9 @@ class TextSubstitution(BaseSubstitution):
         return ""
 
 
+@implementer(IStringSubstitution)
 class IndentedTextSubstitution(TextSubstitution):
     """Like full body text substitution aobve, but with indentation chars"""
-
-    implements(IStringSubstitution)
 
     description = _(u'Body text (indented)')
 
@@ -47,31 +44,9 @@ class IndentedTextSubstitution(TextSubstitution):
             return "\n".join(["\t" + l for l in text.splitlines()])
 
 
-class ATTextExtractor(object):
-    """Extract text field from ATCT contents"""
-
-    implements(ITextExtractor)
-
-    def __init__(self, context):
-        self.context = context
-
-    @property
-    def text(self):
-        context = self.context
-        field = context.getField('text')
-        if field:
-            text = field.get(context)
-            transforms = getToolByName(context, 'portal_transforms')
-            stream = transforms.convertTo('text/plain',
-                                          text,
-                                          mimetype='text/html')
-            return stream.getData().strip()
-
-
+@implementer(ITextExtractor)
 class PADiscussionTextExtractor(object):
     """Extract text field from plone.app.discussion comments"""
-
-    implements(ITextExtractor)
 
     def __init__(self, context):
         self.context = context
@@ -85,11 +60,10 @@ class PADiscussionTextExtractor(object):
         return stream.getData().strip()
 
 
+@implementer(ITextExtractor)
 class DexterityTextExtractor(object):
     """Try to extract text from Dexterity contents
     """
-
-    implements(ITextExtractor)
 
     def __init__(self, context):
         self.context = context
@@ -98,8 +72,8 @@ class DexterityTextExtractor(object):
     def text(self):
         context = self.context
         text = getattr(context, 'text', '')
-        if isinstance(text, basestring):
-            text = text.decode('utf-8')
+        if isinstance(text, str):
+            text = text
         else:
             text = getattr(context.text, 'output', '')
         transforms = getToolByName(context, 'portal_transforms')
@@ -107,11 +81,10 @@ class DexterityTextExtractor(object):
         return stream.getData().strip()
 
 
+@implementer(ITextExtractor)
 class GeneralTextExtractor(object):
     """Try to extract text from something (AKA: there is a "text" attribute?)
     """
-
-    implements(ITextExtractor)
 
     def __init__(self, context):
         self.context = context
@@ -120,11 +93,8 @@ class GeneralTextExtractor(object):
     def text(self):
         context = self.context
         text = getattr(context, 'text', '')
-        if isinstance(text, basestring):
-            text = text.decode('utf-8')
-        elif isinstance(text, BaseUnit):
-            # Ploneboard use this mess
-            text = str(text).decode('utf-8')
+        if isinstance(text, str):
+            text = text
         else:
             return ''
         transforms = getToolByName(context, 'portal_transforms')
