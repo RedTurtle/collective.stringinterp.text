@@ -1,10 +1,11 @@
 Changelog
 =========
 
-0.4 (unreleased)
+1.0.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- upgrade to plone 5.2 and python3.8.
+  [reflab]
 
 
 0.3 (2017-11-07)
