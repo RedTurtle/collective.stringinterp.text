@@ -21,12 +21,6 @@
        name="indented_text"
        />
 
-
-   <adapter
-       for="Products.Archetypes.interfaces.IBaseContent"
-       provides=".interfaces.ITextExtractor"
-       factory=".adapters.ATTextExtractor"
-       />
    <adapter
        zcml:condition="installed plone.app.discussion"
        for="plone.app.discussion.interfaces.IComment"

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.4.dev0'
+version = '1.0.0.dev0'
 
 tests_require = ['plone.app.testing', 'plone.dexterity']
 
@@ -14,15 +14,17 @@ setup(name='collective.stringinterp.text',
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.0",
-        "Framework :: Plone :: 4.1",
-        "Framework :: Plone :: 4.2",
-        "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: Addon",
+        "Framework :: Plone :: 5.2",
         "Programming Language :: Python",
-        "License :: OSI Approved :: GNU General Public License (GPL)",
-        ],
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Operating System :: OS Independent",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+      ],      
       keywords='plone plonegov rule interpolation email',
       author='RedTurtle Technology',
       author_email='sviluppoplone@redturtle.it',

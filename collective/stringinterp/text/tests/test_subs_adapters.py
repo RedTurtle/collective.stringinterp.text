@@ -7,16 +7,16 @@ from plone.app.testing import TEST_USER_ID
 
 from plone.app.discussion.comment import Comment
 
-from collective.stringinterp.text.interfaces import ITextExtractor 
+from collective.stringinterp.text.interfaces import ITextExtractor
 from collective.stringinterp.text.testing import STRING_INTERP_TEXT_INTEGRATION_TESTING
 
 class TestStringSubstitutionAdapter(unittest.TestCase):
 
     layer = STRING_INTERP_TEXT_INTEGRATION_TESTING
-    
+
     def setUp(self):
         setRoles(self.layer['portal'], TEST_USER_ID, ['Manager'])
-    
+
     def test_simple_extraction(self):
         self.layer['portal'].invokeFactory(type_name='Document', id='document',
                                            text='Foo bar baz')
@@ -42,7 +42,7 @@ class TestStringSubstitutionAdapter(unittest.TestCase):
 class TestCommentAdapter(unittest.TestCase):
 
     layer = STRING_INTERP_TEXT_INTEGRATION_TESTING
-    
+
     def test_pacomment_text(self):
         comment = Comment()
         comment.text = u'Foo bar baz'
@@ -51,7 +51,7 @@ class TestCommentAdapter(unittest.TestCase):
 
 
 class Foo(object):
-    
+
     def __init__(self):
         self.text = ''
 
@@ -59,7 +59,7 @@ class Foo(object):
 class TestWhateverObjectAdapter(unittest.TestCase):
 
     layer = STRING_INTERP_TEXT_INTEGRATION_TESTING
-    
+
     def test_pacomment_text(self):
         obj = Foo()
         obj.text = 'Foo bar baz'
